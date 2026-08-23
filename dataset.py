@@ -79,39 +79,6 @@ class SaccadeDataset(Dataset):
     def __getitem__(self, idx):
         return self.inputs[idx], self.targets[idx], self.masks[idx], self.thetas[idx]
 
-
-class SaccadeDataset(Dataset):
-    def __init__(self, num_samples, seq_len=512):
-        self.num_samples = num_samples
-        self.seq_len = seq_len
-
-        self.inputs = torch.zeros(num_samples, seq_len, 3)
-        self.targets = torch.zeros(num_samples, seq_len, 2)
-        self.masks = torch.ones(num_samples, seq_len, 1)
-        self.thetas = torch.zeros(num_samples)
-
-        for i in range(num_samples):
-            theta = torch.rand(1).item() * 2 * math.pi
-            self.thetas[i] = theta
-
-            stim_duration = 15
-            cue_duration = 5
-            delay_duration = torch.randint(50, 400, (1,)).item()
-            go_cue_time = stim_duration + delay_duration
-
-            self.inputs[i, :stim_duration, 0] = math.sin(theta)
-            self.inputs[i, :stim_duration, 1] = math.cos(theta)
-
-            self.targets[i, go_cue_time:, 0] = math.sin(theta)
-            self.targets[i, go_cue_time:, 1] = math.cos(theta)
-            self.masks[i, go_cue_time:go_cue_time+cue_duration, 0] = 0.0
-            self.inputs[i, go_cue_time:go_cue_time+cue_duration, 2] = 1.0
-
-    def __len__(self):
-        return self.num_samples
-
-    def __getitem__(self, idx):
-        return self.inputs[idx], self.targets[idx], self.masks[idx], self.thetas[idx]
     
 class DoubleAngularVelocityDataset(Dataset):
     def __init__(self, num_samples, seq_len=256, dt=0.1, min_semicircle_fraction=1.2, max_semicircle_fraction=4.0):
