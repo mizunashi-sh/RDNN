@@ -1,5 +1,7 @@
 # RDNN
-This is the code for the paper [Divisive Normalization Shapes Low-Rank Slow Manifolds for Continuous Working Memory](https://openreview.net/pdf?id=a43l19lyfC).
+This is the code for the paper *Divisive Normalization Shapes Low-Rank Slow Manifolds for Continuous Working Memory* (Published in TMLR).
+
+[OpenReview](https://openreview.net/pdf?id=a43l19lyfC) | [arXiv](https://arxiv.org/abs/2608.01947)
 
 ## Citation
 ```
